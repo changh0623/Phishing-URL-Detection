@@ -1,0 +1,70 @@
+Loading dataset...
+Dataset size: 2092
+                                    url  label
+0  arounbiotech.com/includes/tEYm94Q8AD      1
+1    thefreedictionary.com/Thomas+Wolfe      0
+2                          shneaky.net/      0
+Label counts:
+ label
+1    1046
+0    1046
+Name: count, dtype: int64
+Label ratio:
+ label
+1    0.5
+0    0.5
+Name: proportion, dtype: float64
+
+=== Baseline (heuristic, threshold tuned on train) ===
+[Baseline1] Best threshold on val: 1 (F1_1=0.5901, Recall_1=0.6238)
+              precision    recall  f1-score   support
+
+           0     0.5765    0.5381    0.5567       210
+           1     0.5650    0.6029    0.5833       209
+
+    accuracy                         0.5704       419
+   macro avg     0.5708    0.5705    0.5700       419
+weighted avg     0.5708    0.5704    0.5700       419
+
+Confusion matrix:
+ [[113  97]
+ [ 83 126]]
+
+=== Baseline (handcrafted features + LR) ===
+              precision    recall  f1-score   support
+
+           0     0.5796    0.6762    0.6242       210
+           1     0.6092    0.5072    0.5535       209
+
+    accuracy                         0.5919       419
+   macro avg     0.5944    0.5917    0.5889       419
+weighted avg     0.5944    0.5919    0.5889       419
+
+Confusion matrix:
+ [[142  68]
+ [103 106]]
+
+=== AI Pipeline (SentenceTransformer embeddings + LR) ===
+Device: mps
+              precision    recall  f1-score   support
+
+           0     0.8333    0.8333    0.8333       210
+           1     0.8325    0.8325    0.8325       209
+
+    accuracy                         0.8329       419
+   macro avg     0.8329    0.8329    0.8329       419
+weighted avg     0.8329    0.8329    0.8329       419
+
+Confusion matrix:
+ [[175  35]
+ [ 35 174]]
+
+=== Qualitative examples (Baseline1 vs AI) ===
+                                                                                                            url  y  b1  ai
+                                                                              www.cs.waikato.ac.nz/~ihw/mg.html  0   1   0
+torrentreactor.net/torrents/1629518/Hope-Sandoval-amp%3B-The-Warm-Inventions-Bavarian-Fruit-Bread-%28LP-2001%29  0   1   0
+                                                                         dehomefurniture.com/files/get_msg.html  1   0   1
+                                                                            windowsandpaperwalls.wordpress.com/  0   0   1
+                                                                                            catlong.com/jhg45s]  1   0   0
+
+[Saved] outputs/results_summary.csv, outputs/reports.json, outputs/cm_*.csv, outputs/qualitative_examples.csv, outputs/accuracy_bar.png
